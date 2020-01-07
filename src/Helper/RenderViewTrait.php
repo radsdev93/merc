@@ -2,7 +2,7 @@
 
 namespace RAdSDev93\MercLegacy\Helper;
 
-class RenderViewTrait
+trait RenderViewTrait
 {
     public function renderView($viewPath, $dataArray)
     {

@@ -21,7 +21,6 @@ use RAdSDev93\MercLegacy\Controller\Update\UpdateUsuario;
 use RAdSDev93\MercLegacy\Controller\Update\UpdateCategoria;
 use RAdSDev93\MercLegacy\Controller\Update\UpdateProduto;
 use RAdSDev93\MercLegacy\Controller\Update\UpdateTributo;
-use RAdSDev93\MercLegacy\Controller\Update\UpdateVenda;
 /* DELETE */
 use RAdSDev93\MercLegacy\Controller\Delete\DeleteUsuario;
 use RAdSDev93\MercLegacy\Controller\Delete\DeleteCategoria;

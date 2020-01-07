@@ -102,4 +102,14 @@ class Usuario implements EntityInterface
     {
         return password_verify($senha, $this->senha);
     }
+
+    public function validaLoginEmail($email)
+    {
+        $query = "SELECT uid, nome, email, nivel, data_cadastro FROM usuarios WHERE email = :email";
+        $connection = Connection::connect();
+        $stmt = $connection->prepare($query);
+        $stmt->bindValue(':email', $email);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
 }
