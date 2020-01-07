@@ -52,6 +52,7 @@ class Usuario implements EntityInterface
             header('Location: /listar-usuarios');
             return;
         }
+        $this->senha = password_hash($this->senha, PASSWORD_ARGON2I);
         $query = "INSERT INTO usuarios (nome, email, nivel, senha, data_cadastro) 
                   VALUES (:nome, :email, :nivel, :senha, :data_cadastro)";
         $connection = Connection::connect();
@@ -71,6 +72,7 @@ class Usuario implements EntityInterface
             header('Location: /listar-usuarios');
             return;
         }
+        $this->senha = password_hash($this->senha, PASSWORD_ARGON2I);
         $query = "UPDATE usuarios set nome = :nome, email = :email, nivel = :nivel, senha = :senha WHERE uid = :uid";
         $connection = Connection::connect();
         $stmt = $connection->prepare($query);
@@ -94,5 +96,10 @@ class Usuario implements EntityInterface
     public function carregarVendas()
     {
         $this->vendas = Venda::listarPorUsuario($this->uid);
+    }
+
+    public function validaSenha($senha)
+    {
+        return password_verify($senha, $this->senha);
     }
 }
