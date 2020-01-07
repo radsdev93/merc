@@ -14,9 +14,9 @@ A stack utilizada para o desenvolvimento do **Merc!** é:
 
 Esse software contém:
 
-##Entidades
+## Entidades
 
-####Usuário
+#### Usuário
 - [ ] Cadastrode usuários com dois níveis:
 	- [ ] **Usuário Administrador** - consulta, criação, alteração, exclusão de usuários, 
 			tributos, categorias e produtos, e criação e exclusão de registros de venda;
@@ -33,14 +33,14 @@ Contendo os seguintes atributos:
 		- Operador;
 
 
-####Categoria
+#### Categoria
 - [ ] Cadastro de Categorias com os seguintes atributos:
 	- [ ] ID da categoria;
 	- [ ] Nome da categoria;
 	- [ ] Lista de produtos atrelada à categoria;
 	- [ ] Lista de impostos atrelada à categoria;
 
-####Produto
+#### Produto
 - [ ] Cadastro de Produtos com os seguintes atributos:
 	- [ ] ID do produto
 	- [ ] Nome do produto;
@@ -49,7 +49,7 @@ Contendo os seguintes atributos:
 	- [ ] Categoria do produto;
 	- [ ] Quantidade do produto em estoque;
 
-####Tributo
+#### Tributo
 - [ ] Cadastro de Tributos com os seguintes atributos:
 	- [ ] ID do tributo;
 	- [ ] Nome do tributo;
@@ -57,7 +57,7 @@ Contendo os seguintes atributos:
 	- [ ] Lista de categorias atreladas ao tributo;
 	- [ ] Valor percentual do tributo;
 
-####Venda
+#### Venda
 - [ ] Cadastro de Vendas com os seguintes atributos:
 	- [ ] ID da venda;
 	- [ ] ID do usuário que registrou a venda;
@@ -67,7 +67,7 @@ Contendo os seguintes atributos:
 	- [ ] Valor total dos produtos + tributos da venda;
 	- [ ] Data e hora do registro da venda;
 
-##Telas
+## Telas
 
 - [ ] Tela inicial, com menu de opções:
 	- [ ] **Usuários** (somente para usuário administrador);
@@ -90,16 +90,16 @@ Acompanhe o repositório para manter-se informado sobre as mudanças.
 
 ##Deploy
 
-####Pré-requisitos:
+#### Pré-requisitos:
 
 - PHP 5.6.40;
 - PostgreSQL Server 9.4.25;
 - Servidor HTTP de sua preferência (Apache, NGINX, etc.);
 
-#####Configurações do Banco de Dados:
+##### Configurações do Banco de Dados:
 
-**Usuário**: postgres
-**Senha**: Merc@2020!
+- **Usuário**: postgres
+- **Senha**: Merc@2020!
 
 - Na pasta sql, localizada no diretório raiz do projeto, execute os comandos:
 	- Criar banco de dados **merc**:
@@ -111,7 +111,7 @@ Acompanhe o repositório para manter-se informado sobre as mudanças.
 	- Popular as tabelas com os valores inicias de demonstração:
 	`psql -h hostname -d merc -U postgres -f merc_populate_tables.sql`;
 
-####Configurações do Projeto:
+#### Configurações do Projeto:
 
 Após instalar e configurar propriamente os pré-requisitos no seu ambiente,
 dentro do diretório raíz do projeto, execute as seguintes etapas:
@@ -123,7 +123,7 @@ dentro do diretório raíz do projeto, execute as seguintes etapas:
 3. Pronto! É só subir o servidor configurando-o de tal forma que a aplicação seja servida à partir do diretório **public**!
 
 
-####Usuários de teste:
+#### Usuários de teste:
 
 **Administrador**
 - Email: *admin@merc.com*
