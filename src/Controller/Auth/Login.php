@@ -31,15 +31,18 @@ class Login implements RequestHandlerInterface
         );
 
         $usuario = new Usuario();
-        $usuario->validaLoginEmail($email);
+        $id = $usuario->validaLoginEmail($email);
+        $usuario = new Usuario($id["uid"]);
 
         if (is_null($usuario) || !$usuario->validaSenha($senha)) {
-            $this->setFlashMessage('danger', "E-mail ou senha inválidos!");
+            $this->setFlashMessage('danger', "Combinação errada de email e senha!");
             header('Location: /entrar');
             return;
         }
 
         $_SESSION['logado'] = true;
+        $_SESSION['uid'] = $usuario->isUid();
+        $_SESSION['nivel'] = $usuario->getNivel();
 
         header('Location: /inicio');
     }

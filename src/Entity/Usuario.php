@@ -36,23 +36,26 @@ class Usuario implements EntityInterface
 
     public function carregar()
     {
-        $query = "SELECT uid, nome, email, nivel, data_cadastro FROM usuarios WHERE uid = :uid";
+        $query = "SELECT uid, nome, email, senha, nivel, data_cadastro FROM usuarios WHERE uid = :uid";
         $connection = Connection::connect();
         $stmt = $connection->prepare($query);
         $stmt->bindValue(':uid', $this->uid);
         $stmt->execute();
         $row = $stmt->fetch();
         $this->nome = $row['nome'];
+        $this->email = $row['email'];
+        $this->senha = $row['senha'];
+        $this->nivel = $row['nivel'];
+        $this->data_cadastro = $row['data_cadastro'];
     }
 
     public function inserir($params = false)
     {
-        if($this->nivel !== "Administrador" || $this->nivel !== "Operador") {
+        if($this->nivel != "Administrador" && $this->nivel != "Operador") {
             $this->setFlashMessage("danger", "Nível de usuário inexistente!");
-            header('Location: /listar-usuarios');
-            return;
+            header('Location: /inicio');
+            exit;
         }
-        $this->senha = password_hash($this->senha, PASSWORD_ARGON2I);
         $query = "INSERT INTO usuarios (nome, email, nivel, senha, data_cadastro) 
                   VALUES (:nome, :email, :nivel, :senha, :data_cadastro)";
         $connection = Connection::connect();
@@ -67,21 +70,14 @@ class Usuario implements EntityInterface
 
     public function atualizar($params = false)
     {
-        if($this->nivel !== "Administrador" || $this->nivel !== "Operador") {
-            $this->setFlashMessage("danger", "Nível de usuário inexistente!");
-            header('Location: /listar-usuarios');
-            return;
-        }
-        $this->senha = password_hash($this->senha, PASSWORD_ARGON2I);
-        $query = "UPDATE usuarios set nome = :nome, email = :email, nivel = :nivel, senha = :senha WHERE uid = :uid";
+        $query = "UPDATE usuarios set nome = :nome, email = :email, senha = :senha WHERE uid = :uid";
         $connection = Connection::connect();
         $stmt = $connection->prepare($query);
         $stmt->bindValue(':nome', $this->nome);
         $stmt->bindValue(':email', $this->email);
-        $stmt->bindValue(':nivel', $this->nivel);
         $stmt->bindValue(':senha', $this->senha);
         $stmt->bindValue(':uid', $this->uid);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     public function excluir()
@@ -105,11 +101,76 @@ class Usuario implements EntityInterface
 
     public function validaLoginEmail($email)
     {
-        $query = "SELECT uid, nome, email, nivel, data_cadastro FROM usuarios WHERE email = :email";
+        $query = "SELECT uid FROM usuarios WHERE email = :email";
         $connection = Connection::connect();
         $stmt = $connection->prepare($query);
         $stmt->bindValue(':email', $email);
         $stmt->execute();
         return $stmt->fetch();
+    }
+
+    public function isUid()
+    {
+        return $this->uid;
+    }
+
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function getSenha()
+    {
+        return $this->senha;
+    }
+
+    public function getNivel()
+    {
+        return $this->nivel;
+    }
+
+    public function getDataCadastro()
+    {
+        return $this->data_cadastro;
+    }
+
+    public function getVendas()
+    {
+        return $this->vendas;
+    }
+
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    public function setSenha($senha)
+    {
+        $this->senha = $senha;
+    }
+
+    public function setNivel($nivel)
+    {
+        $this->nivel = $nivel;
+    }
+
+    public function setDataCadastro($data_cadastro)
+    {
+        $this->data_cadastro = $data_cadastro;
+    }
+
+    public function setVendas($vendas)
+    {
+        $this->vendas = $vendas;
     }
 }

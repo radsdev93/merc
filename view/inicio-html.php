@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Merc!</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -17,25 +17,25 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/usuarios">Usuários</a>
+                    <a class="nav-link" href="/listar-usuarios">Usuários</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/categorias">Categorias</a>
+                    <a class="nav-link" href="/listar-categorias">Categorias</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/produtos">Produtos</a>
+                    <a class="nav-link" href="/listar-produtos">Produtos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/tributos">Tributos</a>
+                    <a class="nav-link" href="/listar-tributos">Tributos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/vendas">Vendas</a>
+                    <a class="nav-link" href="/listar-vendas">Vendas</a>
                 </li>
             </ul>
         </div>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-                <a class="btn btn-sm btn-outline-light" href="/logout">Sair</a>
+                <a class="btn btn-sm btn-outline-light" href="/sair">Sair</a>
             </li>
         </ul>
     </nav>

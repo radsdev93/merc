@@ -4,7 +4,7 @@ namespace RAdSDev93\MercLegacy\Infra;
 
 use PDO;
 
-include './../../config/config.php';
+include __DIR__ . '/../../config/config.php';
 class Connection
 {
     public static function connect()

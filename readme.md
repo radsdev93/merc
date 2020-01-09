@@ -20,7 +20,7 @@ Esse software contém:
 - [ ] Cadastrode usuários com dois níveis:
 	- [ ] **Usuário Administrador** - consulta, criação, alteração, exclusão de usuários, 
 			tributos, categorias e produtos, e criação e exclusão de registros de venda;
-	- [ ] **Usuário Operador** - consulta de tributos, categorias e produtos
+	- [ ] **Usuário Operador** - consulta de usuários, tributos, categorias e produtos
 			e criação e consulta de registros de vendas;
 Contendo os seguintes atributos:
 	- [ ] ID do usuário;
@@ -70,8 +70,9 @@ Contendo os seguintes atributos:
 ## Telas
 
 - [ ] Tela inicial, com menu de opções:
-	- [ ] **Usuários** (somente para usuário administrador);
+	- [ ] **Usuários**
 		- [ ] Lista de Usuários com opções de criar, alterar e excluir;
+		- [ ] Lista de usuários para consulta somente;
 	- [ ] **Tributos**
 		- [ ] Usuário administrador: Lista de tributos com opções de criar, alterar e excluir;
 		- [ ] Usuário operador: Lista de tributos para consulta somente;
@@ -88,7 +89,7 @@ Contendo os seguintes atributos:
 As funcionalidades contidas nesse projeto poderão ser aumentadas, alteradas ou reduzidas conforme necessidade.
 Acompanhe o repositório para manter-se informado sobre as mudanças.
 
-##Deploy
+## Deploy
 
 #### Pré-requisitos:
 

@@ -5,7 +5,7 @@ namespace RAdSDev93\MercLegacy\Entity;
 use RAdSDev93\MercLegacy\Helper\FlashMessageTrait;
 use RAdSDev93\MercLegacy\Infra\Connection;
 
-class Venda implements VendaInterfaceInterface
+class Venda implements VendaInterface
 {
     use FlashMessageTrait;
 
@@ -109,7 +109,7 @@ class Venda implements VendaInterfaceInterface
         $query = "SELECT vid, valor_produtos, valor_tributos, valor_total, data_registro FROM vendas WHERE usuario_id = :usuario_id";
         $connection = Connection::connect();
         $stmt = $connection->prepare($query);
-        $stmt->bindValue(':usuario_id', usuario_id);
+        $stmt->bindValue(':usuario_id', $usuario_id);
         $stmt->execute();
         return $stmt->fetchAll();
     }

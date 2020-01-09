@@ -1,5 +1,5 @@
 <?php include __DIR__ . '/../inicio-html.php'; ?>
-    <form action="/realiza-login" method="post">
+    <form action="/entrando" method="post">
         <div class="form-group">
             <label for="email">E-mail:</label>
             <input type="email" name="email" id="email" class="form-control">

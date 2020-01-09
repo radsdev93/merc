@@ -1,20 +1,34 @@
-<?php include __DIR__ . '/inicio-html.php'; ?>
-    <table class="table table-sm table-dark table-hover table-bordered table-responsive text-center align-middle">
+<?php include __DIR__ . '/inicio-html.php' ?>
+    <div class="alert alert-dismissible alert-info text-center fade show" role="alert">
+        Use o menu superior para navegar pelo sistema!
+    </div>
+    <h2 class="text-center">Meu Usuário</h2>
+    <table class="table table-sm table-dark table-hover table-bordered text-center align-middle">
         <thead>
         <tr>
             <th>Nome</th>
             <th>Email</th>
+            <th>Nível</th>
             <th>Data de Cadastro</th>
             <th>Ações</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td><?= $_SESSION['usuario']->getNome() ?></td>
-            <td><?= $_SESSION['usuario']->getEmail() ?></td>
-            <td><?= $_SESSION['usuario']->getDataCadastro()->format('d/m/Y H:i:s') ?></td>
+            <td><?= $usuario->getNome() ?></td>
+            <td><?= $usuario->getEmail() ?></td>
+            <td><?= $usuario->getNivel() ?></td>
             <td>
-                <a class="btn btn-sm btn-outline-info" href="/atualizar-usuario?uid=<?= $_SESSION['uid'] ?>">Editar</a>
+                <?php
+                    $date = new DateTime($usuario->getDataCadastro());
+                    echo $date->format('d/m/Y H:i:s');
+                ?>
+            </td>
+            <td>
+                <form action="/atualizar-usuario" method="post">
+                <input type="hidden" name="uid" id="uid" value="<?= $_SESSION['uid'] ?>">
+                <button type="submit" class="btn btn-sm btn-outline-info" >Editar</button>
+                </form>
             </td>
         </tr>
         </tbody>
