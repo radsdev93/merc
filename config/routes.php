@@ -16,11 +16,13 @@ use RAdSDev93\MercLegacy\Controller\Read\ListCategoria;
 use RAdSDev93\MercLegacy\Controller\Read\ListProduto;
 use RAdSDev93\MercLegacy\Controller\Read\ListTributo;
 use RAdSDev93\MercLegacy\Controller\Read\ListVenda;
+use RAdSDev93\MercLegacy\Controller\Read\DetailVenda;
 /* UPDATE */
 use RAdSDev93\MercLegacy\Controller\Update\UpdateUsuario;
 use RAdSDev93\MercLegacy\Controller\Update\UpdateCategoria;
 use RAdSDev93\MercLegacy\Controller\Update\UpdateProduto;
 use RAdSDev93\MercLegacy\Controller\Update\UpdateTributo;
+use RAdSDev93\MercLegacy\Controller\Update\UpdateVenda;
 /* DELETE */
 use RAdSDev93\MercLegacy\Controller\Delete\DeleteUsuario;
 use RAdSDev93\MercLegacy\Controller\Delete\DeleteCategoria;
@@ -52,11 +54,13 @@ return [
     '/listar-produtos' => ListProduto::class,
     '/listar-tributos' => ListTributo::class,
     '/listar-vendas' => ListVenda::class,
+    '/detalhes-venda' => DetailVenda::class,
     /* UPDATE */
     '/atualizar-usuario' => UpdateUsuario::class,
     '/atualizar-categoria' => UpdateCategoria::class,
     '/atualizar-produto' => UpdateProduto::class,
     '/atualizar-tributo' => UpdateTributo::class,
+    '/atualizar-venda' => UpdateVenda::class,
     /* DELETE */
     '/remover-usuario' => DeleteUsuario::class,
     '/remover-categoria' => DeleteCategoria::class,

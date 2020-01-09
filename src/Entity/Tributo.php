@@ -131,7 +131,7 @@ class Tributo implements EntityHasCategoriaInterface
     {
         $this->valor_percentual = $valor_percentual;
     }
-    
+
     public function isTid()
     {
         return $this->tid;
