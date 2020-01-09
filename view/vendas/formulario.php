@@ -1,33 +1,43 @@
 <?php include __DIR__ . '/../inicio-html.php'; ?>
-    <form action="/gravar-produto" method="post">
-        <input type="hidden" name="pid" id="pid" value="<?= isset($produto) ? $produto->isPid() : '' ?>">
+<?php
+echo '<pre>';
+var_dump($categorias);
+var_dump($produtos);
+echo '</pre>';
+?>
+    <h3>Adicione os produtos da venda:</h3>
+
+    <form action="/gravar-venda" method="post">
+        <input type="hidden" name="usuario_id" id="usuario_id" value="<?= isset($venda) ? $venda->getUsuarioId() : '' ?>">
         <div class="form-group">
-            <label for="nome">Nome</label>
-            <input type="text" id="nome" name="nome" class="form-control" value="<?= isset($produto) ? $produto->getNome() : '' ?>" required>
-        </div>
-        <div class="form-group">
-            <label for="preco">Preço</label>
-            <input type="number" step="0.01" min="0" id="preco" name="preco" class="form-control" value="<?= isset($produto) ? $produto->getPreco() : '' ?>" required>
-        </div>
-        <div class="form-group">
-            <label for="descricao">Descrição</label>
-            <input type="text" id="descricao" name="descricao" class="form-control" value="<?= isset($produto) ? $produto->getDescricao() : '' ?>" required>
-        </div>
-        <div class="form-group">
-            <label for="estoque">Estoque</label>
-            <input type="number" step="1" min="0" id="estoque" name="estoque" class="form-control" value="<?= isset($produto) ? $produto->getEstoque() : '' ?>" required>
-        </div>
-        <div class="form-group">
-            <label for="categoria_id">Categoria</label>
-            <select id="categoria_id" name="categoria_id" class="form-control" required>
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <?php foreach($categorias as $categoria): ?>
-                <option value="<?= $categoria['cid'] ?>" <?= isset($produto) && $categoria['cid'] == $produto->getCategoriaId() ? 'selected' : '' ?>>
-                    <?= $categoria['nome'] ?>
-                </option>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-<?= $categoria['cid'] ?> role="tab" aria-controls="pills-profile" aria-selected="false"><?= $categoria['nome'] ?></a>
+                </li>
                 <?php endforeach ?>
-            </select>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <?php foreach ($categorias as $categoria): ?>
+                <div class="tab-pane fade" id="pills-<?= $categoria['cid'] ?>>" role="tabpanel" aria-labelledby="pills-<?= $categoria['cid'] ?>-tab">
+                    <?php foreach($produtos as $produto): ?>
+                    <?php if($produto['categoria_id'] == $categoria['cid']): ?>
+                    <p><?= $produto['nome'] ?></p>
+                    <?php endif ?>
+                    <?php endforeach ?>
+                </div>
+                <?php endforeach ?>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Salvar</button>
-        <a href="/listar-produtos" class="btn btn-secondary">Cancelar</a>
+        <br/>
+        <div class="row justify-content-center">
+            <div class="col-1">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+            <div class="col-1">
+                <a href="/listar-vendas" class="btn btn-secondary">Cancelar</a>
+
+            </div>
+        </div>
     </form>
 <?php include __DIR__ . '/../fim-html.php'; ?>

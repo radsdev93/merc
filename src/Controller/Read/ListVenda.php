@@ -24,7 +24,7 @@ class ListVenda implements RequestHandlerInterface
         }
         $vendas = new Venda($vid);
         $this->listaDeVendas = $vendas->listar();
-        echo $html = $this->renderView('produtos/listar-vendas.php', [
+        echo $html = $this->renderView('vendas/listar-vendas.php', [
             'vendas' => $this->listaDeVendas,
             'titulo' => 'Vendas',
         ]);

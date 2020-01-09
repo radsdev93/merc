@@ -14,13 +14,12 @@ class PersistVenda implements RequestHandlerInterface
 
     public function handle()
     {
-        if(isset($_POST['pid'])) {
-            $pid = filter_input(
-                INPUT_POST,
-                'pid',
-                FILTER_VALIDATE_INT
+        $usuario_id = filter_input(
+            INPUT_POST,
+            'usuario_id',
+            FILTER_VALIDATE_INT
             );
-        }
+
 
         $nome = filter_input(
             INPUT_POST,
@@ -55,12 +54,13 @@ class PersistVenda implements RequestHandlerInterface
         $tipo = 'success';
 
         if (!is_null($pid) && $pid !== false) {
-            $this->produto = new Produto($pid);
+            $this->venda = new Venda($pid);
             $this->produto->setNome($nome);
             $this->produto->setPreco($preco);
             $this->produto->setDescricao($descricao);
             $this->produto->setEstoque($estoque);
             $this->produto->setCategoriaId($categoria_id);
+            $this->venda->setDataRegistro(date('Y-m-d h:i:s'));
             $this->produto->atualizar();
             $this->setFlashMessage($tipo, 'Produto atualizado com sucesso!');
         } else {
@@ -73,7 +73,7 @@ class PersistVenda implements RequestHandlerInterface
             $this->produto->inserir();
             $this->setFlashMessage($tipo, 'Produto registrado com sucesso!');
         }
-        header('Location: /listar-produtos');
+        header('Location: /listar-vendas');
         exit;
     }
 }

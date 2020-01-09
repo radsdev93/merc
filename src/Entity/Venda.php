@@ -133,4 +133,39 @@ class Venda implements VendaInterface
     {
         $this->produtos = Produto::listarPorVenda($this->vid);
     }
+
+    public function isVid()
+    {
+        return $this->vid;
+    }
+
+    public function getValorProdutos()
+    {
+        return $this->valor_produtos;
+    }
+
+    public function getValorTributos()
+    {
+        return $this->valor_tributos;
+    }
+
+    public function getValorTotal()
+    {
+        return $this->valor_total;
+    }
+
+    public function getDataRegistro()
+    {
+        return $this->data_registro;
+    }
+
+    public function getUsuarioId()
+    {
+        return $this->usuario_id;
+    }
+
+    public function getProdutos()
+    {
+        return $this->produtos;
+    }
 }
