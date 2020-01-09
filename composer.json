@@ -6,6 +6,7 @@
   },
   "require": {
     "php": "5.6.40",
-    "twbs/bootstrap": "4.4.1"
+    "twbs/bootstrap": "4.4.1",
+    "datatables/datatables": "^1.10"
   }
 }
