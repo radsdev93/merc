@@ -17,7 +17,7 @@ class ListCategoria implements RequestHandlerInterface
         $categoria = new Categoria();
         $this->listaDeCategorias = $categoria->listar();
         echo $html = $this->renderView('categorias/listar-categorias.php', [
-            'usuarios' => $this->listaDeCategorias,
+            'categorias' => $this->listaDeCategorias,
             'titulo' => 'Categorias',
         ]);
     }

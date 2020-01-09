@@ -4,13 +4,9 @@
             display: inline-block;
         }
     </style>
-    <div class="alert alert-dismissible alert-warning text-center fade show" role="alert">
-        As categorias são atribuídas aos produtos e tributos nas suas respectivas páginas!<br/>
-        Ao excluir uma categoria, todos os produtos e tributos relacionados à ela receberão a categoria-base em seu lugar!
-    </div>
     <?php if(isset($_SESSION['nivel']) && $_SESSION['nivel'] === "Administrador"): ?>
     <div class="row justify-content-center">
-        <a href="/registrar-categoria" class="btn btn-sm btn-success">Registrar nova categoria</a>
+        <a href="/registrar-tributo" class="btn btn-sm btn-success">Registrar novo tributo</a>
     </div>
     <br/>
     <?php endif ?>
@@ -18,25 +14,31 @@
         <thead>
         <tr>
             <th>Nome</th>
+            <th>Descrição</th>
+            <th>Valor Percentual</th>
+            <th>Categoria</th>
             <?php if(isset($_SESSION['nivel']) && $_SESSION['nivel'] === "Administrador"): ?>
                 <th>Ações</th>
             <?php endif ?>
         </tr>
         </thead>
         <tbody>
-        <?php foreach($categorias as $categoria): ?>
+        <?php foreach($tributos as $tributo): ?>
             <tr>
-                <td><?= $categoria['nome'] ?></td>
+                <td><?= $tributo['nome'] ?></td>
+                <td><?= $tributo['descricao'] ?></td>
+                <td><?= $tributo['valor_percentual'] ?></td>
+                <td><?= $tributo['categoria_nome'] ?></td>
                 <?php if(isset($_SESSION['nivel']) && $_SESSION['nivel'] === "Administrador"): ?>
                 <td>
                     <div>
-                        <form action="/atualizar-categoria" method="post">
-                            <input type="hidden" name="cid" id="cid" value="<?= $categoria['cid'] ?>">
-                            <button id="cid" type="submit" class="btn btn-sm btn-outline-info" >Editar</button>
+                        <form action="/atualizar-tributo" method="post">
+                            <input type="hidden" name="tid" id="tid" value="<?= $tributo['tid'] ?>">
+                            <button id="tid" type="submit" class="btn btn-sm btn-outline-info" >Editar</button>
                         </form>
-                        <form action="/remover-categoria" method="post">
-                            <input type="hidden" name="cid" value="<?= $categoria['cid'] ?>">
-                            <button id="cid" type="submit" class="btn btn-sm btn-outline-danger" >Excluir</button>
+                        <form action="/remover-tributo" method="post">
+                            <input type="hidden" name="tid" value="<?= $tributo['tid'] ?>">
+                            <button id="tid" type="submit" class="btn btn-sm btn-outline-danger" >Excluir</button>
                         </form>
                     </div>
                 </td>

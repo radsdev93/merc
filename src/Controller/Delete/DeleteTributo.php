@@ -20,7 +20,7 @@ class DeleteTributo implements RequestHandlerInterface
             );
             $tributo = new Tributo($tid);
             if(!$tributo) {
-                $this->defineMensagem('danger', 'Tributo inexistente!');
+                $this->setFlashMessage('danger', 'Tributo inexistente!');
                 header('Location: /listar-tributos');
                 exit;
             }

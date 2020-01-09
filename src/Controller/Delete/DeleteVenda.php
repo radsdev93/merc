@@ -20,7 +20,7 @@ class DeleteVenda implements RequestHandlerInterface
             );
             $venda = new Venda($vid);
             if(!$venda) {
-                $this->defineMensagem('danger', 'Venda inexistente!');
+                $this->setFlashMessage('danger', 'Venda inexistente!');
                 header('Location: /listar-vendas');
                 exit;
             }

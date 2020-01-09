@@ -10,11 +10,11 @@
         <input type="hidden" name="uid" id="uid" value="<?= isset($usuario) ? $usuario->isUid() : '' ?>">
         <div class="form-group">
             <label for="nome">Nome</label>
-            <input type="text" id="nome" name="nome" class="form-control" value="<?= isset($usuario) ? $usuario->getNome() : ''; ?>">
+            <input type="text" id="nome" name="nome" class="form-control" value="<?= isset($usuario) ? $usuario->getNome() : '' ?>">
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" class="form-control" value="<?= isset($usuario) ? $usuario->getEmail() : ''; ?>">
+            <input type="email" id="email" name="email" class="form-control" value="<?= isset($usuario) ? $usuario->getEmail() : '' ?>">
         </div>
         <div class="form-group">
             <label for="senha">Senha</label>

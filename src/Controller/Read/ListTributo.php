@@ -16,7 +16,7 @@ class ListTributo implements RequestHandlerInterface
     {
         $tributo = new Tributo();
         $this->listaDeTributos = $tributo->listar();
-        echo $html = $this->renderView('categorias/listar-tributos.php', [
+        echo $html = $this->renderView('tributos/listar-tributos.php', [
             'tributos' => $this->listaDeTributos,
             'titulo' => 'Tributos',
         ]);

@@ -20,7 +20,7 @@ class DeleteCategoria implements RequestHandlerInterface
             );
             $categoria = new Categoria($cid);
             if(!$categoria) {
-                $this->defineMensagem('danger', 'Categoria inexistente!');
+                $this->setFlashMessage('danger', 'Categoria inexistente!');
                 header('Location: /listar-categorias');
                 exit;
             }

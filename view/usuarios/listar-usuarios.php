@@ -4,10 +4,12 @@
         display: inline-block;
     }
 </style>
+    <?php if(isset($_SESSION['nivel']) && $_SESSION['nivel'] === "Administrador"): ?>
     <div class="row justify-content-center">
         <a href="/registrar-usuario" class="btn btn-sm btn-success">Registrar novo usuário</a>
     </div>
     <br/>
+    <?php endif ?>
     <table class="table table-sm table-dark table-hover table-bordered text-center align-middle">
         <thead>
         <tr>

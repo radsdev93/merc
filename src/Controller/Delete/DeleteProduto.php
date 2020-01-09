@@ -20,7 +20,7 @@ class DeleteProduto implements RequestHandlerInterface
             );
             $produto = new Produto($pid);
             if(!$produto) {
-                $this->defineMensagem('danger', 'Produto inexistente!');
+                $this->setFlashMessage('danger', 'Produto inexistente!');
                 header('Location: /listar-produtos');
                 exit;
             }

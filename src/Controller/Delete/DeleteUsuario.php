@@ -20,7 +20,7 @@ class DeleteUsuario implements RequestHandlerInterface
             );
             $usuario = new Usuario($uid);
             if(!$usuario) {
-                $this->defineMensagem('danger', 'Usuário inexistente!');
+                $this->setFlashMessage('danger', 'Usuário inexistente!');
                 header('Location: /listar-cursos');
                 exit;
             }

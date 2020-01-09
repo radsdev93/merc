@@ -50,20 +50,6 @@ class Categoria implements EntityInterface
         $stmt = $connection->prepare($query);
         $stmt->bindValue(':nome', $this->nome);
         $stmt->execute();
-        if ($params !== false) {
-            $produtos = $params["produtos"];
-            $tributos = $params["tributos"];
-            foreach ($produtos as $produto) {
-                $p = new Produto($produto["pid"]);
-                $p->setCategoriaId($this->cid);
-                $p->atualizar();
-            }
-            foreach ($tributos as $tributo) {
-                $t = new Tributo($tributo["tid"]);
-                $t->setCategoriaId($this->cid);
-                $t->atualizar();
-            }
-        }
     }
 
     public function atualizar($params = false)
@@ -105,7 +91,7 @@ class Categoria implements EntityInterface
         if($this->cid === CATEGORIA_PADRAO) {
             $this->setFlashMessage("danger", "Não é possível excluir a categoria-base!");
             header('Location: /listar-categorias');
-            return;
+            exit;
         }
         foreach($this->produtos as $produto) {
             $p = new Produto($produto["pid"]);
@@ -122,6 +108,21 @@ class Categoria implements EntityInterface
         $stmt = $connection->prepare($query);
         $stmt->bindValue(':cid', $this->cid);
         $stmt->execute();
+    }
+
+    public function isCid()
+    {
+        return $this->cid;
+    }
+
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
     }
 
     public function carregarProdutos()

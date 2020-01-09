@@ -16,7 +16,7 @@ class Tributo implements EntityHasCategoriaInterface
     public function __construct($id = false)
     {
         if ($id) {
-            $this->pid = $id;
+            $this->tid = $id;
             $this->carregar();
         }
     }
@@ -70,7 +70,7 @@ class Tributo implements EntityHasCategoriaInterface
         $stmt->bindValue(':valor_percentual', $this->valor_percentual);
         $stmt->bindValue(':categoria_id', $this->categoria_id);
         $stmt->bindValue(':tid', $this->tid);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     public function excluir()
@@ -100,5 +100,40 @@ class Tributo implements EntityHasCategoriaInterface
     public function setCategoriaId($categoria_id)
     {
         $this->categoria_id = $categoria_id;
+    }
+
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+    }
+
+    public function getDescricao()
+    {
+        return $this->descricao;
+    }
+
+    public function setDescricao($descricao)
+    {
+        $this->descricao = $descricao;
+    }
+
+    public function getValorPercentual()
+    {
+        return $this->valor_percentual;
+    }
+
+    public function setValorPercentual($valor_percentual)
+    {
+        $this->valor_percentual = $valor_percentual;
+    }
+    
+    public function isTid()
+    {
+        return $this->tid;
     }
 }

@@ -3,6 +3,7 @@
 namespace RAdSDev93\MercLegacy\Controller\Update;
 
 use RAdSDev93\MercLegacy\Controller\RequestHandlerInterface;
+use RAdSDev93\MercLegacy\Entity\Categoria;
 use RAdSDev93\MercLegacy\Entity\Tributo;
 use RAdSDev93\MercLegacy\Helper\FlashMessageTrait;
 use RAdSDev93\MercLegacy\Helper\RenderViewTrait;
@@ -12,9 +13,13 @@ class UpdateTributo implements RequestHandlerInterface
     use RenderViewTrait, FlashMessageTrait;
 
     private $tributo;
+    private $categorias;
 
     public function handle()
     {
+        $categoria = new Categoria();
+        $this->categorias = $categoria->listar();
+
         $tid = filter_input(
             INPUT_POST,
             'tid',
@@ -31,7 +36,8 @@ class UpdateTributo implements RequestHandlerInterface
 
         echo $html = $this->renderView('tributos/formulario.php', [
             'titulo' => 'Atualizar tributo: ' . $this->tributo->getNome(),
-            'tributo' => $this->tributo
+            'tributo' => $this->tributo,
+            'categorias' => $this->categorias
         ]);
     }
 }
