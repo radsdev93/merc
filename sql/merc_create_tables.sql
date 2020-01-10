@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS tributos (
     FOREIGN KEY (categoria_id)
     REFERENCES categorias (cid)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON UPDATE CASCADE);
 
 CREATE TABLE IF NOT EXISTS produtos (
   pid SERIAL NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS produtos (
     FOREIGN KEY (categoria_id)
     REFERENCES categorias (cid)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON UPDATE CASCADE);
 
 CREATE TABLE IF NOT EXISTS vendas (
   vid SERIAL NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS vendas (
     FOREIGN KEY (usuario_id)
     REFERENCES usuarios (uid)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON UPDATE CASCADE);
 
 CREATE TABLE IF NOT EXISTS venda_produto (
   venda_id SERIAL NOT NULL,
@@ -61,10 +61,10 @@ CREATE TABLE IF NOT EXISTS venda_produto (
   CONSTRAINT fk_venda_produto_venda_id
     FOREIGN KEY (venda_id)
     REFERENCES vendas (vid)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT fk_venda_produto_produto_id
     FOREIGN KEY (produto_id)
     REFERENCES produtos (pid)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
