@@ -1,8 +1,7 @@
 <?php include __DIR__ . '/../inicio-html.php'; ?>
     <h3>Adicione os produtos da venda:</h3>
-
     <form action="/gravar-venda" method="post">
-        <table class="table table-sm table-dark table-hover table-bordered text-center align-middle" id="venda">
+        <table id="venda" class="table table-sm table-striped table-bordered dt-responsive nowrap text-center" style="width:100%">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -17,15 +16,27 @@
             <?php foreach($produtos as $produto): ?>
                 <tr>
                     <td>
-                        <?= $produto['id'] ?>
-                        <input type="hidden" value="<?= $produto['id'] ?>">
+                        <?= $produto['pid'] ?>
+                        <input type="hidden" name= "pid[]" value="<?= $produto['pid'] ?>">
                     </td>
-                    <td><?= $produto['nome'] ?></td>
-                    <td><?= $produto['preco'] ?></td>
-                    <td><?= $produto['valor_percentual'] ?></td>
-                    <td><?= $produto['categoria_nome'] ?></td>
                     <td>
-                        <input type='number' name='quantidade' value='1' min='0' max='100'/>
+                        <?= $produto['nome'] ?>
+                        <input type="hidden" name= "nome[]" value="<?= $produto['nome'] ?>">
+                    </td>
+                    <td>
+                        <?= 'R$' . number_format($produto['preco'], 2,',','.') ?>
+                        <input type="hidden" name= "preco[]" value="<?= $produto['preco'] ?>">
+                    </td>
+                    <td>
+                        <?= $produto['valor_tributo'] . '%' ?>
+                        <input type="hidden" name= "valor_tributo[]" value="<?= $produto['valor_tributo'] ?>">
+                    </td>
+                    <td>
+                        <?= $produto['categoria_nome'] ?>
+                        <input type="hidden" name= "categoria_nome[]" value="<?= $produto['categoria_nome'] ?>">
+                    </td>
+                    <td>
+                        <input type='number' name='quantidade[]' value='0' min='0' max='100'/>
                     </td>
                 </tr>
             <?php endforeach ?>
@@ -34,7 +45,7 @@
         <br/>
         <div class="row justify-content-center">
             <div class="col-1">
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="submit" class="btn btn-primary">Registrar</button>
             </div>
             <div class="col-1">
                 <a href="/listar-vendas" class="btn btn-secondary">Cancelar</a>
@@ -46,7 +57,7 @@
             var table = $('#venda').DataTable( {
                 colReorder: true,
                 // responsive: true,
-                "pageLength": 50,
+                "pageLength": 10,
                 "language": {
                     "sEmptyTable": "Nenhum registro encontrado",
                     "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",

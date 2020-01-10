@@ -16,8 +16,8 @@
             <th>Valor Produtos</th>
             <th>Valor Tributos</th>
             <th>Valor Total</th>
-            <th>Detalhes</th>
             <th>Categoria</th>
+            <th>Detalhes</th>
             <?php if(isset($_SESSION['nivel']) && $_SESSION['nivel'] === "Administrador"): ?>
                 <th>Ações</th>
             <?php endif ?>
@@ -47,10 +47,6 @@
                 <?php if(isset($_SESSION['nivel']) && $_SESSION['nivel'] === "Administrador"): ?>
                 <td>
                     <div>
-                        <form action="/atualizar-venda" method="post">
-                            <input type="hidden" name="vid" id="vid" value="<?= $venda['vid'] ?>">
-                            <button id="vid" type="submit" class="btn btn-sm btn-outline-info" >Editar</button>
-                        </form>
                         <form action="/remover-venda" method="post">
                             <input type="hidden" name="vid" value="<?= $venda['vid'] ?>">
                             <button id="vid" type="submit" class="btn btn-sm btn-outline-danger" >Excluir</button>

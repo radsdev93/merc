@@ -62,18 +62,6 @@ class Venda implements VendaInterface
             return;
         }
         $produtos = $params["produtos"];
-        foreach($produtos as $produto) {
-            $p = new Produto($produto["pid"]);
-            $this->valor_produtos += $p->getPreco() * $produto["quantidade"];
-            $c = new Categoria($p->getCategoriaId());
-            $tributos = $c->getTributos();
-            foreach($tributos as $tributo) {
-                $this->valor_tributos += ($p->getPreco() * ($tributo["valor_percentual"] / 100)
-                                          * $produto["quantidade"]);
-            }
-            $this->valor_total += $this->valor_produtos + $this->valor_tributos;
-        }
-        $this->data_registro = date("Y-m-d H:i:s");
         $query = "INSERT INTO vendas (valor_produtos, valor_tributos, valor_total, data_registro, usuario_id)
                   VALUES (:valor_produtos, :valor_tributos, :valor_total, :data_registro, :usuario_id)";
         $connection = Connection::connect();
@@ -134,38 +122,23 @@ class Venda implements VendaInterface
         $this->produtos = Produto::listarPorVenda($this->vid);
     }
 
-    public function isVid()
+    public function setUsuarioId($usuario_id)
     {
-        return $this->vid;
+        $this->usuario_id = $usuario_id;
     }
 
-    public function getValorProdutos()
+    public function setValorProdutos($valor_produtos)
     {
-        return $this->valor_produtos;
+        $this->valor_produtos = $valor_produtos;
     }
 
-    public function getValorTributos()
+    public function setValorTributos($valor_tributos)
     {
-        return $this->valor_tributos;
+        $this->valor_tributos = $valor_tributos;
     }
 
-    public function getValorTotal()
+    public function setValorTotal($valor_total)
     {
-        return $this->valor_total;
-    }
-
-    public function getDataRegistro()
-    {
-        return $this->data_registro;
-    }
-
-    public function getUsuarioId()
-    {
-        return $this->usuario_id;
-    }
-
-    public function getProdutos()
-    {
-        return $this->produtos;
+        $this->valor_total = $valor_total;
     }
 }

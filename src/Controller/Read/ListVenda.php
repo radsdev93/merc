@@ -14,15 +14,7 @@ class ListVenda implements RequestHandlerInterface
 
     public function handle()
     {
-
-        if(isset($_POST['vid'])) {
-            $vid = filter_input(
-                INPUT_POST,
-                'vid',
-                FILTER_VALIDATE_INT
-            );
-        }
-        $vendas = new Venda($vid);
+        $vendas = new Venda();
         $this->listaDeVendas = $vendas->listar();
         echo $html = $this->renderView('vendas/listar-vendas.php', [
             'vendas' => $this->listaDeVendas,

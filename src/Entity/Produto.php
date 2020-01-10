@@ -12,6 +12,7 @@ class Produto implements EntityHasCategoriaInterface
     private $descricao;
     private $estoque;
     private $categoria_id;
+    private $tributos;
     private $vendas;
 
     public function __construct($id = false)
@@ -20,14 +21,16 @@ class Produto implements EntityHasCategoriaInterface
             $this->pid = $id;
             $this->carregar();
             $this->carregarVendas();
+            $this->carregarTributos();
         }
     }
 
     public static function listar()
     {
-        $query = "SELECT p.pid, p.nome, p.preco, p.descricao, p.estoque, p.categoria_id, c.nome as categoria_nome
+        $query = "SELECT p.pid, p.nome, p.preco, p.descricao, p.estoque, p.categoria_id, c.nome as categoria_nome, t.valor_percentual as valor_tributo, t.tid as tributo_id, t.nome as tributo_nome
                   FROM produtos p
                   INNER JOIN categorias c ON p.categoria_id = c.cid
+                  INNER JOIN tributos t on c.cid = t.categoria_id
                   ORDER BY p.nome";
         $connection = Connection::connect();
         $result = $connection->query($query);
@@ -116,9 +119,9 @@ class Produto implements EntityHasCategoriaInterface
         $this->vendas = Venda::listarPorProduto($this->pid);
     }
 
-    public function isPid()
+    public function carregarTributos()
     {
-        return $this->pid;
+        $this->tributos = Tributo::listarPorCategoria($this->categoria_id);
     }
 
     public function getNome()
@@ -126,24 +129,9 @@ class Produto implements EntityHasCategoriaInterface
         return $this->nome;
     }
 
-    public function getEstoque()
-    {
-        return $this->estoque;
-    }
-
-    public function getVendas()
-    {
-        return $this->vendas;
-    }
-
     public function getPreco()
     {
         return $this->preco;
-    }
-
-    public function getDescricao()
-    {
-        return $this->descricao;
     }
 
     public function setDescricao($descricao)
