@@ -27,7 +27,7 @@
             <tr>
                 <td><?= $tributo['nome'] ?></td>
                 <td><?= $tributo['descricao'] ?></td>
-                <td><?= $tributo['valor_percentual'] ?></td>
+                <td><?= number_format($tributo['valor_percentual'], 2, ',','.') . '%' ?></td>
                 <td><?= $tributo['categoria_nome'] ?></td>
                 <?php if(isset($_SESSION['nivel']) && $_SESSION['nivel'] === "Administrador"): ?>
                 <td>

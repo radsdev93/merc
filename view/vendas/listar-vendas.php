@@ -11,12 +11,12 @@
     <table class="table table-sm table-dark table-hover table-bordered text-center align-middle">
         <thead>
         <tr>
+            <th>ID</th>
             <th>Vendedor</th>
             <th>Registro</th>
             <th>Valor Produtos</th>
             <th>Valor Tributos</th>
             <th>Valor Total</th>
-            <th>Categoria</th>
             <th>Detalhes</th>
             <?php if(isset($_SESSION['nivel']) && $_SESSION['nivel'] === "Administrador"): ?>
                 <th>Ações</th>
@@ -26,10 +26,11 @@
         <tbody>
         <?php foreach($vendas as $venda): ?>
             <tr>
-                <td><?= $venda['nome_usuario'] ?></td>
+                <td><?= $venda['vid'] ?></td>
+                <td><?= $venda['usuario_nome'] ?></td>
                 <td>
                     <?php
-                    $date = new DateTime($venda->getDataRegistro());
+                    $date = new DateTime($venda['data_registro']);
                     echo $date->format('d/m/Y H:i:s');
                     ?>
                 </td>
@@ -40,7 +41,7 @@
                     <div>
                         <form action="/detalhes-venda" method="post">
                             <input type="hidden" name="vid" id="vid" value="<?= $venda['vid'] ?>">
-                            <button id="vid" type="submit" class="btn btn-sm btn-outline-secondary">Editar</button>
+                            <button id="vid" type="submit" class="btn btn-sm btn-outline-secondary">Ver Detalhes</button>
                         </form>
                     </div>
                 </td>

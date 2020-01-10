@@ -7,7 +7,7 @@
                     <th>ID</th>
                     <th>Produto</th>
                     <th>Preço Unitário</th>
-                    <th>Impostos</th>
+                    <th>Tributos</th>
                     <th>Categoria</th>
                     <th>Quantidade</th>
                 </tr>

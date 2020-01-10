@@ -89,12 +89,7 @@ class Tributo implements EntityHasCategoriaInterface
         $stmt = $connection->prepare($query);
         $stmt->bindValue(':categoria_id', $categoria_id);
         $stmt->execute();
-        return $stmt->fetchAll();
-    }
-
-    public function getCategoriaId()
-    {
-        return $this->categoria_id;
+        return $stmt->fetch();
     }
 
     public function setCategoriaId($categoria_id)
@@ -112,19 +107,9 @@ class Tributo implements EntityHasCategoriaInterface
         $this->nome = $nome;
     }
 
-    public function getDescricao()
-    {
-        return $this->descricao;
-    }
-
     public function setDescricao($descricao)
     {
         $this->descricao = $descricao;
-    }
-
-    public function getValorPercentual()
-    {
-        return $this->valor_percentual;
     }
 
     public function setValorPercentual($valor_percentual)
@@ -135,5 +120,20 @@ class Tributo implements EntityHasCategoriaInterface
     public function isTid()
     {
         return $this->tid;
+    }
+
+    public function getDescricao()
+    {
+        return $this->descricao;
+    }
+
+    public function getValorPercentual()
+    {
+        return $this->valor_percentual;
+    }
+
+     public function getCategoriaId()
+    {
+        return $this->categoria_id;
     }
 }

@@ -119,29 +119,9 @@ class Usuario implements EntityInterface
         return $this->nome;
     }
 
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    public function getSenha()
-    {
-        return $this->senha;
-    }
-
     public function getNivel()
     {
         return $this->nivel;
-    }
-
-    public function getDataCadastro()
-    {
-        return $this->data_cadastro;
-    }
-
-    public function getVendas()
-    {
-        return $this->vendas;
     }
 
     public function setNome($nome)
@@ -169,8 +149,24 @@ class Usuario implements EntityInterface
         $this->data_cadastro = $data_cadastro;
     }
 
-    public function setVendas($vendas)
+    public function getEmail()
     {
-        $this->vendas = $vendas;
+        return $this->email;
     }
+
+    public function getSenha()
+    {
+        return $this->senha;
+    }
+
+    public function getDataCadastro()
+    {
+        return $this->data_cadastro;
+    }
+
+    public function getVendas()
+    {
+        return $this->vendas;
+    }
+
 }

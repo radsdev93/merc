@@ -55,15 +55,8 @@ class Venda implements VendaInterface
 
     public function inserir($params = false)
     {
-        if($params === false) {
-            $this->setFlashMessage("danger", "É necessário informar os produtos e suas quantidades para 
-                                                           registrar uma venda!");
-            header('Location: /listar-vendas');
-            return;
-        }
-        $produtos = $params["produtos"];
         $query = "INSERT INTO vendas (valor_produtos, valor_tributos, valor_total, data_registro, usuario_id)
-                  VALUES (:valor_produtos, :valor_tributos, :valor_total, :data_registro, :usuario_id)";
+                  VALUES (:valor_produtos, :valor_tributos, :valor_total, :data_registro, :usuario_id) RETURNING *";
         $connection = Connection::connect();
         $stmt = $connection->prepare($query);
         $stmt->bindValue(':valor_produtos', $this->valor_produtos);
@@ -71,16 +64,27 @@ class Venda implements VendaInterface
         $stmt->bindValue(':valor_total', $this->valor_total);
         $stmt->bindValue(':data_registro', $this->data_registro);
         $stmt->bindValue(':usuario_id', $this->usuario_id);
-        $stmt->execute();
+        if($stmt->execute()) {
+            $row = $stmt->fetch();
+            $this->vid = $row["vid"];
+            foreach($params as $produto) {
+                $this->relacionarVendaProdutos($produto);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public function relacionarVendaProdutos($produto)
+    {
         $query = "INSERT INTO venda_produto (venda_id, produto_id, quantidade)
                   VALUES (:venda_id, :produto_id, :quantidade)";
-        foreach($produtos as $produto) {
-            $stmt = $connection->prepare($query);
-            $stmt->bindValue(':venda_id', $this->vid);
-            $stmt->bindValue(':produto_id', $produto["pid"]);
-            $stmt->bindValue(':quantidade', $produto["quantidade"]);
-            $stmt->execute();
-        }
+        $connection = Connection::connect();
+        $stmt = $connection->prepare($query);
+        $stmt->bindValue(':venda_id', $this->vid);
+        $stmt->bindValue(':produto_id', $produto["pid"]);
+        $stmt->bindValue(':quantidade', $produto["quantidade"]);
+        return $stmt->execute();
     }
 
     public function excluir()
@@ -140,5 +144,15 @@ class Venda implements VendaInterface
     public function setValorTotal($valor_total)
     {
         $this->valor_total = $valor_total;
+    }
+
+    public function setDataRegistro($data_registro)
+    {
+        $this->data_registro = $data_registro;
+    }
+
+    public function getProdutos()
+    {
+        return $this->produtos;
     }
 }

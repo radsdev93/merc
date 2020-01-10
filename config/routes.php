@@ -60,7 +60,6 @@ return [
     '/atualizar-categoria' => UpdateCategoria::class,
     '/atualizar-produto' => UpdateProduto::class,
     '/atualizar-tributo' => UpdateTributo::class,
-    '/atualizar-venda' => UpdateVenda::class,
     /* DELETE */
     '/remover-usuario' => DeleteUsuario::class,
     '/remover-categoria' => DeleteCategoria::class,

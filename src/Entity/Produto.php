@@ -100,7 +100,7 @@ class Produto implements EntityHasCategoriaInterface
         return $stmt->fetchAll();
     }
 
-    public static function listarPorVenda($venda_id)
+    public static function  listarPorVenda($venda_id)
     {
         $query = "SELECT p.pid, p.nome, p.preco, p.descricao, p.estoque, p.categoria_id, v.quantidade as quantidade
                   FROM produtos p
@@ -129,19 +129,9 @@ class Produto implements EntityHasCategoriaInterface
         return $this->nome;
     }
 
-    public function getPreco()
-    {
-        return $this->preco;
-    }
-
     public function setDescricao($descricao)
     {
         $this->descricao = $descricao;
-    }
-
-    public function getCategoriaId()
-    {
-        return $this->categoria_id;
     }
 
     public function setNome($nome)
@@ -163,4 +153,40 @@ class Produto implements EntityHasCategoriaInterface
     {
         $this->categoria_id = $categoria_id;
     }
+
+    public function isPid()
+    {
+        return $this->pid;
+    }
+
+    public function getPreco()
+    {
+        return $this->preco;
+    }
+
+    public function getDescricao()
+    {
+        return $this->descricao;
+    }
+
+    public function getEstoque()
+    {
+        return $this->estoque;
+    }
+
+    public function getCategoriaId()
+    {
+        return $this->categoria_id;
+    }
+
+    public function getTributos()
+    {
+        return $this->tributos;
+    }
+
+    public function getVendas()
+    {
+        return $this->vendas;
+    }
+
 }

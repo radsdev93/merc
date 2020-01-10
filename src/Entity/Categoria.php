@@ -110,11 +110,6 @@ class Categoria implements EntityInterface
         $stmt->execute();
     }
 
-    public function isCid()
-    {
-        return $this->cid;
-    }
-
     public function getNome()
     {
         return $this->nome;
@@ -133,6 +128,16 @@ class Categoria implements EntityInterface
     public function carregarTributos()
     {
         $this->tributos = Tributo::listarPorCategoria($this->cid);
+    }
+
+    public function isCid()
+    {
+        return $this->cid;
+    }
+
+    public function getProdutos()
+    {
+        return $this->produtos;
     }
 
     public function getTributos()

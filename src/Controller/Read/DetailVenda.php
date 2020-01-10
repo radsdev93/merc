@@ -3,37 +3,43 @@
 namespace RAdSDev93\MercLegacy\Controller\Read;
 
 use RAdSDev93\MercLegacy\Controller\RequestHandlerInterface;
-use RAdSDev93\MercLegacy\Entity\Produto;
-use RAdSDev93\MercLegacy\Entity\Usuario;
+use RAdSDev93\MercLegacy\Entity\Categoria;
+use RAdSDev93\MercLegacy\Entity\Tributo;
 use RAdSDev93\MercLegacy\Entity\Venda;
+use RAdSDev93\MercLegacy\Helper\FlashMessageTrait;
 use RAdSDev93\MercLegacy\Helper\RenderViewTrait;
 
 class DetailVenda implements RequestHandlerInterface
 {
-    use RenderViewTrait;
-
-    private $vendasPorProduto;
-    private $vendasPorUsuarios;
+    use RenderViewTrait, FlashMessageTrait;
 
     public function handle()
     {
-        $venda = new Venda();
-        $usuario = new Usuario();
-        $produto = new Produto();
-        $usuarios = $usuario->listar();
-        $produtos = $produto->listar();
-        foreach($usuarios as $usuario) {
-            $vendasPorUsuarios[] = $venda->listarPorUsuario($usuario['uid']);
+        if(!isset($_POST['vid'])) {
+            $this->setFlashMessage("danger", "Registro de venda não encontrado!");
+            header('Location: /listar-vendas');
+            exit;
         }
-        foreach($produtos as $produto) {
-            $vendasPorProduto[] = $venda->listarPorProduto($produto['pid']);
+        $vid = filter_input(
+            INPUT_POST,
+            'vid',
+            FILTER_VALIDATE_INT
+        );
+        $venda = new Venda($vid);
+        $produtos = $venda->getProdutos();
+
+        foreach($produtos as $key=>$produto) {
+            $categoria = new Categoria($produto['categoria_id']);
+            $produtos[$key]['categoria_nome'] = $categoria->getNome();
+            $produtos[$key]['tributo'] = Tributo::listarPorCategoria($produto['categoria_id']);
+            $produtos[$key]['subtotal_produto'] = $produtos[$key]['preco'] * $produtos[$key]['quantidade'];
+            $produtos[$key]['subtotal_tributo'] = $produtos[$key]['preco'] * ($produtos[$key]['tributo']['valor_percentual']/100);
+            $produtos[$key]['subtotal'] = $produtos[$key]['subtotal_produto'] + $produtos[$key]['subtotal_tributo'];
         }
 
-        $this->listaDeVendas = $vendas->listar();
-        echo $html = $this->renderView('produtos/listar-vendas.php', [
-            'vendasPorProduto' => $this->vendasPorProduto,
-            'vendasPorUsuarios' => $this->vendasPorUsuarios,
-            'titulo' => 'Vendas',
+        echo $html = $this->renderView('vendas/detalhes-venda.php', [
+            'titulo' => 'Detalhes da Venda ID: ' . $vid,
+            'produtos' => $produtos
         ]);
     }
 }

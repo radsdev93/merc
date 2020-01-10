@@ -9,5 +9,6 @@ interface VendaInterface
     public static function listar();
     public function carregar();
     public function inserir($params = false);
+    public function relacionarVendaProdutos($produtos);
     public function excluir();
 }
