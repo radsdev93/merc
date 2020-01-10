@@ -3,6 +3,7 @@
 namespace RAdSDev93\MercLegacy\Controller\Persist;
 
 use RAdSDev93\MercLegacy\Controller\RequestHandlerInterface;
+use RAdSDev93\MercLegacy\Entity\Produto;
 use RAdSDev93\MercLegacy\Entity\Venda;
 use RAdSDev93\MercLegacy\Helper\FlashMessageTrait;
 
@@ -18,11 +19,29 @@ class PersistVenda implements RequestHandlerInterface
             header('Location: /listar-vendas');
             exit;
         }
+
         foreach($_POST['quantidade'] as $key=>$quantidade) {
             if($quantidade == 0) {
                 $lista_remocao[] = $key;
             }
         }
+
+        foreach($_POST['pid'] as $key=>$produto_id) {
+            $temp_produto = new Produto($produto_id);
+            if($temp_produto->getEstoque() < 1) {
+                $this->setFlashMessage('danger', 'Produtos sem estoque foram adicionados!');
+                header('Location: /listar-vendas');
+                exit;
+            }
+            if(isset($lista_remocao)) {
+                if (!in_array($key, $lista_remocao)) {
+                    $produtos['pid'][] = filter_var($produto_id, FILTER_VALIDATE_INT);
+                }
+            } else {
+                $produtos['pid'][] = filter_var($produto_id, FILTER_VALIDATE_INT);
+            }
+        }
+
         foreach($_POST['preco'] as $key=>$preco) {
             if(isset($lista_remocao)) {
                 if (!in_array($key, $lista_remocao)) {
@@ -50,15 +69,7 @@ class PersistVenda implements RequestHandlerInterface
                 $produtos['categoria_nome'][] = filter_var($categoria, FILTER_SANITIZE_STRING);
             }
         }
-        foreach($_POST['pid'] as $key=>$produto_id) {
-            if(isset($lista_remocao)) {
-                if (!in_array($key, $lista_remocao)) {
-                    $produtos['pid'][] = filter_var($produto_id, FILTER_VALIDATE_INT);
-                }
-            } else {
-                $produtos['pid'][] = filter_var($produto_id, FILTER_VALIDATE_INT);
-            }
-        }
+
         foreach($_POST['quantidade'] as $key=>$quantidade) {
             if(isset($lista_remocao)) {
                 if (!in_array($key, $lista_remocao)) {

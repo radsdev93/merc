@@ -37,6 +37,19 @@ class Produto implements EntityHasCategoriaInterface
         return $result->fetchAll();
     }
 
+    public static function listarComEstoque()
+    {
+        $query = "SELECT p.pid, p.nome, p.preco, p.descricao, p.estoque, p.categoria_id, c.nome as categoria_nome, t.valor_percentual as valor_tributo, t.tid as tributo_id, t.nome as tributo_nome
+                  FROM produtos p
+                  INNER JOIN categorias c ON p.categoria_id = c.cid
+                  INNER JOIN tributos t on c.cid = t.categoria_id
+                  WHERE p.estoque > 0
+                  ORDER BY p.nome";
+        $connection = Connection::connect();
+        $result = $connection->query($query);
+        return $result->fetchAll();
+    }
+
     public function carregar()
     {
         $query = "SELECT nome, preco, descricao, estoque, categoria_id FROM produtos WHERE pid = :pid";

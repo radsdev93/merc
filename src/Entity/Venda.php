@@ -84,6 +84,11 @@ class Venda implements VendaInterface
         $stmt->bindValue(':venda_id', $this->vid);
         $stmt->bindValue(':produto_id', $produto["pid"]);
         $stmt->bindValue(':quantidade', $produto["quantidade"]);
+        $p = new Produto($produto["pid"]);
+        $estoqueAnterior = $p->getEstoque();
+        $estoqueAtual = $estoqueAnterior - $produto["quantidade"];
+        $p->setEstoque($estoqueAtual);
+        $p->atualizar();
         return $stmt->execute();
     }
 

@@ -16,7 +16,7 @@ class CreateVenda implements RequestHandlerInterface
     public function handle()
     {
         $produto = new Produto();
-        $produtos = $produto->listar();
+        $produtos = $produto->listarComEstoque();
         echo $html = $this->renderView('vendas/formulario.php', [
             'titulo' => 'Registrar nova venda',
             'produtos' => $produtos

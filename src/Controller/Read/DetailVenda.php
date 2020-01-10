@@ -33,7 +33,7 @@ class DetailVenda implements RequestHandlerInterface
             $produtos[$key]['categoria_nome'] = $categoria->getNome();
             $produtos[$key]['tributo'] = Tributo::listarPorCategoria($produto['categoria_id']);
             $produtos[$key]['subtotal_produto'] = $produtos[$key]['preco'] * $produtos[$key]['quantidade'];
-            $produtos[$key]['subtotal_tributo'] = $produtos[$key]['preco'] * ($produtos[$key]['tributo']['valor_percentual']/100);
+            $produtos[$key]['subtotal_tributo'] = $produtos[$key]['subtotal_produto'] * ($produtos[$key]['tributo']['valor_percentual']/100);
             $produtos[$key]['subtotal'] = $produtos[$key]['subtotal_produto'] + $produtos[$key]['subtotal_tributo'];
         }
 
